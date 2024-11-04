@@ -111,6 +111,20 @@ namespace ConsoleAppConceptTest
             CheckArrayCopyClone();
 
             CheckAbstractClassInheritance();
+
+            //checking multicast delegate
+            Subscriber1 subscriber1 = new Subscriber1();
+            Subscriber2 subscriber2 = new Subscriber2();
+
+            ProcessBusinessLogic processBusinessLogic = new ProcessBusinessLogic();
+            processBusinessLogic.ProcessCompleted += subscriber1.NotifyMe;
+            processBusinessLogic.ProcessCompleted += subscriber2.NotifyMe;
+
+            processBusinessLogic.StartProcess();
+
+            processBusinessLogic.ProcessCompleted -= subscriber1.NotifyMe;
+
+            processBusinessLogic.StartProcess();
         }
 
         //check new tuple syntax/format similar to python
@@ -380,6 +394,41 @@ namespace ConsoleAppConceptTest
             }
         }
 
+    }
+
+    public delegate void Notify(string message);
+
+    public class ProcessBusinessLogic
+    {
+        public event Notify ProcessCompleted;
+
+        public void StartProcess()
+        {
+            WriteLine("Process started...");
+
+            OnProcessCompleted("Process completed successfully.");
+        }
+
+        protected virtual void OnProcessCompleted(string message)
+        {
+            ProcessCompleted?.Invoke(message);
+        }
+    }
+
+    public class Subscriber1
+    {
+        public void NotifyMe(string message)
+        {
+            WriteLine("Subscriber1 received message: " + message);
+        }
+    }
+
+    public class Subscriber2
+    {
+        public void NotifyMe(string message)
+        {
+            WriteLine("Subscriber2 received message: " + message);
+        }
     }
 
 
