@@ -125,6 +125,8 @@ namespace ConsoleAppConceptTest
             processBusinessLogic.ProcessCompleted -= subscriber1.NotifyMe;
 
             processBusinessLogic.StartProcess();
+
+            CheckQueueImplementation();
         }
 
         //check new tuple syntax/format similar to python
@@ -328,6 +330,38 @@ namespace ConsoleAppConceptTest
             shape1.SetY(5);
             shape1.SetZ(5);
             double area = shape1.Area;
+        }
+
+        private static void CheckQueueImplementation()
+        {
+            Queue<int> queue = new Queue<int>();
+            queue.Enqueue(1);
+            queue.Enqueue(2);
+            queue.Enqueue(3);
+
+            WriteLine("Items in queue");
+            PrintQueue(queue);
+
+            int dequeuedElement = queue.Dequeue();
+            WriteLine($"\nDequeued element: {dequeuedElement}");
+
+            WriteLine("queue after dequeueing one element");
+            PrintQueue(queue);
+
+            int fronElement = queue.Peek();
+            WriteLine($"\nFront element: {fronElement}");
+
+            bool containsTwo = queue.Contains(2);
+            WriteLine($"\nqueue contains 2: {containsTwo}");
+
+            int count = queue.Count;
+            WriteLine($"\nNumber of elements in the queue: {count}");
+        }
+
+        private static void PrintQueue(Queue<int> queue)
+        {
+            foreach (var item in queue)
+                Write(item + " ");
         }
     }
 
