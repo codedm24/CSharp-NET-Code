@@ -2,11 +2,15 @@
 # This .gitignore file was automatically created by Microsoft(R) Visual Studio.
 ################################################################################
 
-/ConsoleAppConceptTest/ConsoleAppConceptTest/bin/Debug/net8.0
-/ConsoleAppConceptTest/.vs
-/ConsoleAppConceptTest/ConsoleAppConceptTest/obj/Debug/net8.0
-/ConsoleAppConceptTest/ConsoleAppConceptTest/obj/ConsoleAppConceptTest.csproj.nuget.dgspec.json
-/ConsoleAppConceptTest/ConsoleAppConceptTest/obj/ConsoleAppConceptTest.csproj.nuget.g.props
-/ConsoleAppConceptTest/ConsoleAppConceptTest/obj/ConsoleAppConceptTest.csproj.nuget.g.targets
-/ConsoleAppConceptTest/ConsoleAppConceptTest/obj/project.assets.json
-/ConsoleAppConceptTest/ConsoleAppConceptTest/obj/project.nuget.cache
+# Ignore .vs and obj folders
+.vs/
+obj/
+bin/
+
+# Ignore other temporary files
+*.user
+*.suo
+*.userosscache
+*.userprefs
+*.tmp
+*.log
